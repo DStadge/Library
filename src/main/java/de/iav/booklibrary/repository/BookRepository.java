@@ -1,17 +1,14 @@
 package de.iav.booklibrary.repository;
 
-
 import de.iav.booklibrary.model.Book;
 import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @Repository
 public class BookRepository {
 
-    private List<Book> bookList = new ArrayList<>();
+    private final List<Book> bookList;// "scheinbar überflüssig" = new ArrayList<>();
 
 
     //mit Consturcter erstellt
@@ -33,6 +30,18 @@ public class BookRepository {
         throw new NoSuchElementException("Buch mit der: " + isbn + " nicht gefunden");
     }
 
+    public Book getBookById(String id) {
+        for (Book oneBook : bookList) {
+            if (oneBook.id().equals(id)) {
+                return oneBook;
+            }
+        }
+        throw new NoSuchElementException("Buch mit der: " + id + " nicht gefunden");
+
+
+    }
+
+
     //Buch hinzufügen ohne Rückgabewert
     public void addBook(Book bookToAdd) {
         bookList.add(bookToAdd);
@@ -51,19 +60,12 @@ public class BookRepository {
 
     //Buch ändern
 
-    public Book bookToChange(int iSBNToChange, Book newBook) {
-        Book bookToChange = this.getBookByISBN(iSBNToChange);
+    public Book bookToChange(String idToChange, Book newBook) {
+        Book bookToChange = this.getBookById(idToChange);
         bookList.remove(bookToChange);
-        Book bookToAdd = new Book(iSBNToChange, newBook.Title(), newBook.Autor());
+        Book bookToAdd = new Book(idToChange, newBook.isbn(), newBook.title(), newBook.autor(), newBook.art());
         bookList.add(bookToAdd);
         return (bookToAdd);
-    }
-
-    public Book randomID(int id) {
-        // double random = Math.random();
-        int num = (int) (Math.random() * 999);
-        id = num;
-        return randomID(id);
     }
 
 

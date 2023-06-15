@@ -1,8 +1,18 @@
 package de.iav.booklibrary.model;
 
-public record Book (
+import java.util.UUID;
+
+public record Book(
+        String id,
         int isbn,
-        String Title,
-        String Autor
-){
+        String title,
+        String autor,
+
+        Art art
+) {
+    public Book withId() {
+        return new Book(UUID.randomUUID().toString(), this.isbn, this.title, this.autor, this.art);
+    }
+
+
 }
