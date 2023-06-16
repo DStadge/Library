@@ -36,9 +36,9 @@ public class BookControllerTest {
     @Test
     void getOneBook_When_BookExistByGivenId_Then_ExpectsStatusOkAndReturnBook() throws Exception {
         bookRepository.addBook(new Book("1", 123, "Titel", "Autor", Art.E_BOOK));
-        String expectedId = "1";
+        String expectedIBSN = "123";
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/books/{id}", expectedId))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/books/{isbn}", expectedIBSN))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("""
                             {
