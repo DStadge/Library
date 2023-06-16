@@ -60,7 +60,7 @@ public class BookRepository {
                 return;
             }
         }
-        throw new NoSuchElementException("Buch mit der: " + isbn + "nicht gefunden");
+        throw new BookISBNNotFoundException(isbn);
     }
 
     //Buch ändern
