@@ -3,7 +3,6 @@ package de.iav.booklibrary.controller;
 import de.iav.booklibrary.model.Book;
 import de.iav.booklibrary.service.BookService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController

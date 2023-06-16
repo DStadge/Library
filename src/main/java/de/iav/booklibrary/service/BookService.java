@@ -3,7 +3,6 @@ package de.iav.booklibrary.service;
 import de.iav.booklibrary.model.Book;
 import de.iav.booklibrary.repository.BookRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 
@@ -24,6 +23,13 @@ public class BookService {
     public Book getBookByISBN(int isbn) {
         return bookList.getBookByISBN(isbn);
     }
+
+    public Book getBookById(String id) {
+        return bookList.getBookById(id);
+    }
+
+
+
 
     public void addBook(Book bookToAdd) {
 

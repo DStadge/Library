@@ -7,7 +7,6 @@ public record Book(
         int isbn,
         String title,
         String autor,
-
         Art art
 ) {
     public Book withId() {

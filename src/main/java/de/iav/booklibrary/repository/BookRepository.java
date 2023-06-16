@@ -1,7 +1,10 @@
 package de.iav.booklibrary.repository;
 
+import de.iav.booklibrary.exception.BookIdNotFoundExecption;
+import de.iav.booklibrary.exception.BookISBNNotFoundException;
 import de.iav.booklibrary.model.Book;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -16,29 +19,31 @@ public class BookRepository {
         this.bookList = bookList;
     }
 
+
     public List<Book> getBookList() {
         return bookList;
     }
 
-    //Buch nach ISBN Nummer suchen
-    public Book getBookByISBN(int isbn) {
-        for (Book oneBook : bookList) {
-            if (oneBook.isbn() == isbn) {
-                return oneBook;
-            }
-        }
-        throw new NoSuchElementException("Buch mit der: " + isbn + " nicht gefunden");
-    }
+    //Buch nach ID suchen
 
     public Book getBookById(String id) {
-        for (Book oneBook : bookList) {
-            if (oneBook.id().equals(id)) {
-                return oneBook;
+        for (Book oneBookById : bookList) {
+            if (oneBookById.id().equals(id)) {
+                return oneBookById;
             }
         }
-        throw new NoSuchElementException("Buch mit der: " + id + " nicht gefunden");
+        throw new BookIdNotFoundExecption(id + "Buch nicht gefunden");
+    }
 
 
+    //Buch nach ISBN Nummer suchen
+    public Book getBookByISBN(int isbn) {
+        for (Book oneBookByISBN : bookList) {
+            if (oneBookByISBN.isbn() == isbn) {
+                return oneBookByISBN;
+            }
+        }
+        throw new BookISBNNotFoundException(isbn);
     }
 
 
